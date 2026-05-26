@@ -1,4 +1,4 @@
-# ⚜️ Little Lillies ⚜️
+# ⚜️ Little Lilies ⚜️
 
 [![Java](https://img.shields.io/badge/Java-25+-red.svg)](https://adoptium.net/)
 [![JavaFX](https://img.shields.io/badge/JavaFX-17.0.19-blue.svg)](https://openjfx.io/)
