@@ -32,8 +32,8 @@
    ```bash
    git clone https://github.com/EleonooraK/LittleLiliesGame.git
    cd LittleLiliesGame
-2. Open the project in an IDE.
-3. Launch the game with `Launcher.java`
+2. **Open the project in an IDE.**
+3. **Launch the game with `Launcher.java`**
 
 ## 🤝 Created by
 - **[Eleonoora Kõrge](https://github.com/EleonooraK)**
