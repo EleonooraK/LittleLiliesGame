@@ -8,7 +8,7 @@
 
 ## 🎯 Gameplay
 
-"You wake up in a strange garden. It's raining. The silence feels suffocating."
+"You wake up in a strange garden. It's raining. The silence feels suffocating."  
 **You're not supposed to be here. You need to escape.**
 - Explore the silent garden and find your way out.
 - Look around to find helpful items and clues.
