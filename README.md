@@ -17,7 +17,7 @@
 
 ## 🎨 User Experience & Atmosphere
 
-*Little Lilies* utilizes a carefully crafted audio-visual environment to pull the player into its world:
+*Little Lilies* integrates a lovingly crafted audio-visual environment to pull the player into its world:
 
 * **Dynamic Visual Themes:** Every area in the garden features a distinct color identity reflected in the user interface to visually guide your exploration.
 * **Immersive Sound Design:** The game features ambient background music that makes you feel like you're in a silent garden on a rainy night.
