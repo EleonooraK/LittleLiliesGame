@@ -4,7 +4,7 @@
 [![JavaFX](https://img.shields.io/badge/JavaFX-21.0.2-blue.svg)](https://openjfx.io/)
 [![Build](https://img.shields.io/badge/Build-Maven-orange.svg)](https://maven.apache.org/)
 
-*A narrative-based mystery exploration game about the secrets of a poisonous kingdom.*
+*A narrative-based mystery exploration game about the secrets of a poisonous flower kingdom.*
 
 ## 🎯 Gameplay
 
