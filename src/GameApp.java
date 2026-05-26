@@ -46,8 +46,8 @@ public class GameApp extends Application {
 
         MediaView backgroundVideo = new MediaView();
         try {
-            URL videoUrl = getClass().getResource("/resources/start_screen.mp4");
-            URL audioUrl = getClass().getResource("/resources/Start_screen_audio.mp3");
+            URL videoUrl = getClass().getResource("/start_screen.mp4");
+            URL audioUrl = getClass().getResource("/Start_screen_audio.mp3");
 
             if (videoUrl != null) {
                 videoPlayer = new MediaPlayer(new Media(videoUrl.toExternalForm()));
@@ -129,8 +129,7 @@ public class GameApp extends Application {
 
     private void switchToGame(Stage stage) {
         try {
-            URL gameAudioUrl = getClass().getResource("/resources/Game_audio.mp3");
-            if (gameAudioUrl != null) {
+            URL gameAudioUrl = getClass().getResource("/Game_audio.mp3");            if (gameAudioUrl != null) {
                 gameAudioPlayer = new MediaPlayer(new Media(gameAudioUrl.toExternalForm()));
                 gameAudioPlayer.setCycleCount(MediaPlayer.INDEFINITE);
                 gameAudioPlayer.play();
@@ -147,8 +146,7 @@ public class GameApp extends Application {
         VBox.setVgrow(mapContainer, Priority.ALWAYS);
 
         try {
-            mapImageView = new ImageView(new Image(getClass().getResourceAsStream("/resources/map_hedge.PNG")));
-        } catch (Exception e) {
+            mapImageView = new ImageView(new Image(getClass().getResourceAsStream("/map_hedge.PNG")));        } catch (Exception e) {
             System.err.println("Error loading base map: " + e.getMessage());
             mapImageView = new ImageView();
         }
@@ -468,9 +466,9 @@ public class GameApp extends Application {
     private void checkAndSwapMapAssets() {
         try {
             if (logic.isHedgeCut()) {
-                mapImageView.setImage(new Image(getClass().getResourceAsStream("/resources/map_no_hedge.PNG")));
+                mapImageView.setImage(new Image(getClass().getResourceAsStream("/map_no_hedge.PNG")));
             } else {
-                mapImageView.setImage(new Image(getClass().getResourceAsStream("/resources/map_hedge.PNG")));
+                mapImageView.setImage(new Image(getClass().getResourceAsStream("/map_hedge.PNG")));
             }
         } catch (Exception e) {
             System.err.println("Map swap resource error: " + e.getMessage());
