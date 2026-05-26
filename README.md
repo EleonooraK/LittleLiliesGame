@@ -23,6 +23,7 @@
 * **Immersive Sound Design:** The game features ambient background music that makes you feel like you're in a silent garden on a rainy night.
 * **Animated Storytelling:** Text is delivered using a typewriter animation to mimic classic retro text-adventures, enhancing the pacing of the narrative and dialogue.
 * **Live Map Tracking:** A visual map updates in real-time to track your character's exact dot position as you navigate through the interconnected locations of the garden.
+* **Marven Integration:** The integration of Marven makes it simple for the user to run the game, no extra files or downloads are necessary.
 
 ## 🎮 Controls
 
