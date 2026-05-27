@@ -41,8 +41,7 @@
 ### From source (requires JDK 21+ and Maven)
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/EleonooraK/LittleLiliesGame.git](https://github.com/EleonooraK/LittleLiliesGame.git)
-   cd LittleLiliesGame
+   git clone https://github.com/EleonooraK/LittleLiliesGame.git
 2. **Open the project in an IDE (e.g., IntelliJ IDEA as a Maven project).**
 3. **Launch the game using Maven:**
    - **Via Terminal:** Run the command ``mvn javafx:run``
