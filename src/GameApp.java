@@ -21,7 +21,7 @@ public class GameApp extends Application {
     private Label locationLabel;
     private Label promptLabel;
     private Label errorLabel;
-    private Circle playerDot;
+    private ImageView playerDot;
     private ImageView mapImageView;
     private Scene menuScene;
 
@@ -154,9 +154,13 @@ public class GameApp extends Application {
         mapImageView.fitHeightProperty().bind(gameRoot.heightProperty().multiply(0.66));
         mapImageView.setPreserveRatio(true);
 
-        playerDot = new Circle(8, Color.PURPLE);
-        playerDot.setStroke(Color.WHITE);
-        playerDot.setStrokeWidth(2);
+        try{
+            Image player = new Image(getClass().getResourceAsStream("/resources/Lily.png"));
+            playerDot = new ImageView(player);
+
+        }catch (Exception e) {
+            System.err.println("Media fallbacks: " + e.getMessage());
+        }
 
         mapContainer.getChildren().addAll(mapImageView, playerDot);
 
