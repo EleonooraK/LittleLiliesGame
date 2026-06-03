@@ -127,8 +127,8 @@ public class GameLogic {
             return new String[]{
                     "The gate to the north",
                     "The shed to the south",
-                    "The door to the west",
-                    "The path hedge to the east",
+                    "The cellar to the east",
+                    "The hedge to the west",
                     "Interact with the fountain"
             };
         }

@@ -155,7 +155,7 @@ public class GameApp extends Application {
         mapImageView.setPreserveRatio(true);
 
         try{
-            Image player = new Image(getClass().getResourceAsStream("/resources/Lily.png"));
+            Image player = new Image(getClass().getResourceAsStream("/Lily.png"));
             playerDot = new ImageView(player);
 
         }catch (Exception e) {
