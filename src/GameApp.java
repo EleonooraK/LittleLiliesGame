@@ -112,6 +112,8 @@ public class GameApp extends Application {
         quitOption.setOnMouseClicked(e -> handleMenuSelection(primaryStage));
 
         primaryStage.setScene(menuScene);
+        primaryStage.setTitle("Little Lilies");
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/Lily.png")));
         primaryStage.show();
     }
 
@@ -165,13 +167,22 @@ public class GameApp extends Application {
         mapContainer.getChildren().addAll(mapImageView, playerDot);
 
         VBox dialogueBox = new VBox(3);
-        dialogueBox.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9); -fx-padding: 15; -fx-border-color: #7d5a8a; -fx-border-width: 2 0 0 0;");
+        //dialogueBox.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9); -fx-padding: 15; -fx-border-color: #7d5a8a; -fx-border-width: 2 0 0 0;");
+        dialogueBox.setStyle(
+                "-fx-background-color: rgba(18, 3, 26, 0.85);" +
+                        "-fx-padding: 18;" +
+                        "-fx-border-color: #9d4edd #4a1e5d #4a1e5d #9d4edd;" +
+                        "-fx-border-width: 3;" +
+                        "-fx-background-radius: 4;" +
+                        "-fx-border-radius: 4;"
+        );
         dialogueBox.prefHeightProperty().bind(gameRoot.heightProperty().multiply(0.34));
         dialogueBox.maxWidthProperty().bind(gameRoot.widthProperty());
         dialogueBox.setAlignment(Pos.TOP_LEFT);
 
         locationLabel = new Label("LOCATION: FOUNTAIN");
         locationLabel.setStyle("-fx-text-fill: #e0b0ff; -fx-font-family: 'Courier New'; -fx-font-weight: bold; -fx-font-size: 14px;");
+        VBox.setMargin(locationLabel, new Insets(0, 0, 12, 0));
 
         dialogueLabel = new Label();
         dialogueLabel.setStyle("-fx-text-fill: white; -fx-font-family: 'Courier New'; -fx-font-size: 13px;");
@@ -215,7 +226,7 @@ public class GameApp extends Application {
             if (isShowingCommands && e.getCode().isDigitKey()) {
                 String keyText = e.getText();
 
-                if (dialogueLabel.getText().contains("== ESCAPE THE GARDEN ==")) {
+                if (isShowingCommands && logic.getCurrentRoom().getName().equals("GATE") && logic.getKeyRecieved()) {
                     if (keyText.equals("1")) {
                         isShowingCommands = false;
                         // Evaluates coins and triggers the dynamic ending string sequence
@@ -242,7 +253,6 @@ public class GameApp extends Application {
                         }
                     }
                     else if (keyText.equals("2")) {
-
                         renderCompactCommands();
                     }
                     return;
@@ -307,9 +317,13 @@ public class GameApp extends Application {
                     });
                 }
                 else if (moveResponse.equals("GATE_CHOICE")) {
-                    isShowingCommands = true;
                     dialogueLabel.setStyle("-fx-text-fill: #e0b0ff; -fx-font-family: 'Courier New'; -fx-font-size: 13px; -fx-font-weight: bold;");
-                    dialogueLabel.setText("== ESCAPE THE GARDEN ==\nYou have the key to the gate. Do you want to open it?\n\n [1] Yes, open the gate and escape.\n [2] No, stay in the garden.");
+                    if (typewriterTimeline != null) {
+                        typewriterTimeline.stop();
+                    }
+                    dialogueLabel.setText("");
+                    dialogueLabel.setText("You have the key to the gate. Do you want to open it?\n\n [1] Yes, open the gate and escape.\n [2] No, stay in the garden.");
+                    isShowingCommands = true;
                     promptLabel.setText("[Press 1 or 2 to choose...]");
                 }
                 else if (moveResponse.equals("HEDGE_CUT_SUCCESS")) {
@@ -345,6 +359,25 @@ public class GameApp extends Application {
                 promptLabel.setText("[Press ENTER to exit inventory...]");
             }
         });
+
+        FadeTransition pulse = new FadeTransition(Duration.seconds(1.5), promptLabel);
+        pulse.setFromValue(1.0);
+        pulse.setToValue(0.3);
+        pulse.setCycleCount(Animation.INDEFINITE);
+        pulse.setAutoReverse(true);
+        pulse.play();
+
+        TranslateTransition slideUp = new TranslateTransition(Duration.seconds(1), dialogueBox);
+        slideUp.setFromY(200);
+        slideUp.setToY(0);
+        slideUp.setInterpolator(Interpolator.EASE_OUT);
+
+        FadeTransition fadeInBox = new FadeTransition(Duration.seconds(0.5), dialogueBox);
+        fadeInBox.setFromValue(0.0);
+        fadeInBox.setToValue(1.0);
+
+        ParallelTransition introAnimation = new ParallelTransition(slideUp, fadeInBox);
+        introAnimation.play();
 
         stage.setScene(gameScene);
     }
@@ -398,6 +431,10 @@ public class GameApp extends Application {
     }
 
     private void runTypewriterAnimation(String targetText) {
+        if (typewriterTimeline != null) {
+            typewriterTimeline.stop();
+        }
+
         textAnimationRunning = true;
         dialogueLabel.setText("");
         promptLabel.setText("");
@@ -433,8 +470,21 @@ public class GameApp extends Application {
             promptLabel.setText("[Press ENTER to see commands...]");
         } else {
             StringBuilder sb = new StringBuilder("== AREA ACTIONS ==\n");
-            for (int i = 0; i < subchoices.length; i++) {
-                sb.append(" [").append(i + 1).append("] ").append(subchoices[i]).append("\n");
+            if (subchoices.length > 3) {
+                for (int i = 0; i < subchoices.length; i += 2) {
+                    String leftCol = String.format(" [%d] %-45s", (i + 1), subchoices[i]);
+                    sb.append(leftCol);
+
+                    if (i + 1 < subchoices.length) {
+                        String rightCol = String.format(" [%d] %s", (i + 2), subchoices[i + 1]);
+                        sb.append(rightCol);
+                    }
+                    sb.append("\n");
+                }
+            } else {
+                for (int i = 0; i < subchoices.length; i++) {
+                    sb.append(" [").append(i + 1).append("] ").append(subchoices[i]).append("\n");
+                }
             }
             dialogueLabel.setText(sb.toString());
             promptLabel.setText("[Press ENTER to see commands...]");

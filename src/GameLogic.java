@@ -31,12 +31,16 @@ public class GameLogic {
         currentRoom = fountain;
     }
 
+    public boolean getKeyRecieved() {
+        return keyReceived;
+    }
+
     private void createRooms() {
         fountain = new Room("FOUNTAIN", new String[]{
                 "Rain splatters on the surface.",
                 "The water ripples unnaturally.",
-                "The silence around me feels suffocating."
-        }, "fountainBlue", 0, -30);
+                "The silence around you feels suffocating."
+        }, "fountainBlue", 0, 40);
 
         gate = new Room("GATE", new String[]{
                 "This is your way out of here. This is freedom."
@@ -240,7 +244,7 @@ public class GameLogic {
                         // Custom 0 Coin Branch Text
                         if (coins == 0) {
                             return new String[]{
-                                    "\"What a shame. Although I must say, I am not surprised. You are a lily after all. You didn't even drop a single piece of copper into the waters, did you?\"",
+                                    "\"What a shame. Although I must say, I am not surprised. You are a lily after all. Not even a single coin?\"",
                                     "The cat sighs deeply and drops a heavy, cold object into your hand.",
                                     "You received the GATE KEY!",
                                     "[GATE KEY has been added to your inventory!]"
@@ -301,18 +305,18 @@ public class GameLogic {
                         player.addItem(new Item("scissors", "Garden scissors"));
                         scissorsReceived = true;
                         gaveSomething = true;
-                        responseText = "\"Oh you need scissors? I wonder what for?\"";
+                        responseText = "\"Hmm, let's see. Aha! Maybe you can find a use for these. They look sharp.\"";
                         alertText = "[GARDEN SCISSORS have been added to your inventory!]";
                     } else if (!screwdriverReceived && cellarVisited) {
                         player.addItem(new Item("screwdriver", "Rusty screwdriver"));
                         screwdriverReceived = true;
                         gaveSomething = true;
-                        responseText = "\"Anything else you need? Perhaps an arm and a leg?\"";
+                        responseText = "\"...that's why I don't help others. They just keep asking for more. Here, it's all I could find.\"";
                         alertText = "[RUSTY SCREWDRIVER have been added to your inventory!]";
                     }
 
                     if (!gaveSomething) {
-                        return new String[]{"\"I've given you everything I have, little lily. Don't be greedy.\""};
+                        return new String[]{"\"There's nothing here that would help you at this moment.\""};
                     }
                     return new String[]{responseText, alertText};
                 }
@@ -385,7 +389,7 @@ public class GameLogic {
                 }
                 if (index == 4 && shedOpened) { // Open Cat Sub-Menu Tree
                     talkingToCat = true;
-                    return new String[]{"You step closer. The cat looks at you in an unsettling manner."};
+                    return new String[]{"You step closer. The cat's eyes gleam like it knows something you don't."};
                 }
             }
         }
